@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/where-is-wally/static/css/main.498d1ccc.css",
+    "main.css": "/where-is-wally/static/css/main.2329777d.css",
     "main.js": "/where-is-wally/static/js/main.9f8380b5.js",
     "static/media/beach-scene.jpg": "/where-is-wally/static/media/beach-scene.bddf9f162bcf91287287.jpg",
     "static/media/wally.png": "/where-is-wally/static/media/wally.a3e66a57b9a92314daad.png",
@@ -8,11 +8,11 @@
     "static/media/wilma.png": "/where-is-wally/static/media/wilma.24d6215b0ef948634d57.png",
     "static/media/odlaw.png": "/where-is-wally/static/media/odlaw.291cc81ae76d6b4a7654.png",
     "index.html": "/where-is-wally/index.html",
-    "main.498d1ccc.css.map": "/where-is-wally/static/css/main.498d1ccc.css.map",
+    "main.2329777d.css.map": "/where-is-wally/static/css/main.2329777d.css.map",
     "main.9f8380b5.js.map": "/where-is-wally/static/js/main.9f8380b5.js.map"
   },
   "entrypoints": [
-    "static/css/main.498d1ccc.css",
+    "static/css/main.2329777d.css",
     "static/js/main.9f8380b5.js"
   ]
 }
