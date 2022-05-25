@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { firebaseApp } from "./firebase.config";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import Timer from "./Timer";
 
 const ImageMap = (props) => {
+  const storage = getStorage(firebaseApp);
+  const [imageSrc, setImageSrc] = useState(null);
+  const imagesRef = ref(storage, "Assets/beach-scene.jpg");
+  let GameImage = null;
   const {
     clicks,
     setMapCoordinates,
@@ -14,62 +21,71 @@ const ImageMap = (props) => {
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const cacheImage = async () => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = "../Assets/beach-scene.jpg";
-      img.onload = resolve();
-    }).then(() => {
-      setImageLoaded(true);
-    });
-  };
-
   useEffect(() => {
-    cacheImage();
+    getDownloadURL(imagesRef)
+      .then((url) => {
+        setImageSrc(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(() => {
+        setImageLoaded(true);
+      });
   }, []);
 
-  useEffect(() => {
-    if (imageLoaded) {
-      startTimer();
-    }
-  }, [imageLoaded]);
-
-  return (
-    <div className="image-container">
+  if (imageLoaded) {
+    GameImage = (
       <img
-        src={require("../Assets/beach-scene.jpg")}
+        src={imageSrc}
         alt="Beach Wally"
         useMap="#beachmap"
         id="beach"
         className="game-image"
+        onLoad={() => {
+          startTimer();
+        }}
       />
-      <map name="beachmap">
-        <area
-          shape="default"
-          alt=""
-          onClick={(e) => {
-            setClickedMap(!clickedMap);
-            setMapCoordinates(getImageCoordinates(e));
-            setPageCoordinates(getAbsoluteCoordinates(e));
-          }}
-        ></area>
-        {clicks.map((click) => {
-          return (
-            <div
-              key={click.left}
-              alt=""
-              style={{
-                left: click.left,
-                top: click.top,
-                position: "absolute",
-              }}
-              className="successful-click"
-            ></div>
-          );
-        })}
-      </map>
-    </div>
-  );
+    );
+  }
+
+  if (GameImage) {
+    return (
+      <div className="image-container">
+        {GameImage}
+        <map name="beachmap">
+          <area
+            shape="default"
+            alt=""
+            onClick={(e) => {
+              setClickedMap(!clickedMap);
+              setMapCoordinates(getImageCoordinates(e));
+              setPageCoordinates(getAbsoluteCoordinates(e));
+            }}
+          ></area>
+          {clicks.map((click) => {
+            return (
+              <div
+                key={click.left}
+                alt=""
+                style={{
+                  left: click.left,
+                  top: click.top,
+                  position: "absolute",
+                }}
+                className="successful-click"
+              ></div>
+            );
+          })}
+        </map>
+      </div>
+    );
+  } else
+    return (
+      <div className="leaderboard-container">
+        <h1>Get Ready!</h1>
+      </div>
+    );
 };
 
 export default ImageMap;

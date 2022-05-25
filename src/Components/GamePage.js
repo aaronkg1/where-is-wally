@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { ReactNotifications, Store } from "react-notifications-component";
 import { DropDownList } from "./DropDownList";
 import { firebaseApp, db } from "./firebase.config";
@@ -10,11 +11,13 @@ import ImageMap from "./ImageMap";
 import { Link, useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 import Filter from "bad-words";
+import { set } from "lodash";
 
 const GamePage = () => {
   const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [clicks, setClicks] = useState([]);
   const [clickedMap, setClickedMap] = useState(false);
   const [mapCoordinates, setMapCoordinates] = useState([0, 0]);
@@ -30,7 +33,7 @@ const GamePage = () => {
       yCoordOne: 696,
       yCoordTwo: 807,
       found: false,
-      imageSrc: "../Assets/wally.png",
+      imageSrc: "",
     },
     {
       name: "wizard",
@@ -39,7 +42,7 @@ const GamePage = () => {
       yCoordOne: 648,
       yCoordTwo: 743,
       found: false,
-      imageSrc: "../Assets/wizard.png",
+      imageSrc: "",
     },
     {
       name: "odlaw",
@@ -48,7 +51,7 @@ const GamePage = () => {
       yCoordOne: 661,
       yCoordTwo: 755,
       found: false,
-      imageSrc: "../Assets/odlaw.png",
+      imageSrc: "",
     },
     {
       name: "wilma",
@@ -57,9 +60,29 @@ const GamePage = () => {
       yCoordOne: 766,
       yCoordTwo: 849,
       found: false,
-      imageSrc: "../Assets/wilma.png",
+      imageSrc: "",
     },
   ]);
+
+  const getCharacterImages = async () => {
+    const characterCopy = [...characters];
+    const storage = getStorage(firebaseApp);
+
+    await Promise.all(
+      characterCopy.map(async (character) => {
+        return getDownloadURL(ref(storage, `Assets/${character.name}.png`))
+          .then((url) => {
+            character.imageSrc = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+    ).then(() => {
+      setImagesLoaded(true);
+      setCharacters(characterCopy);
+    });
+  };
 
   const startGame = () => {
     setGameStarted(true);
@@ -130,6 +153,10 @@ const GamePage = () => {
       });
     }
   };
+
+  useEffect(() => {
+    getCharacterImages();
+  }, []);
 
   useEffect(() => {
     if (haveAllCharactersBeenFound(characters)) {
@@ -225,7 +252,11 @@ const GamePage = () => {
     return (
       <div>
         <ReactNotifications />
-        <Timer setGlobalTimer={setGlobalTimer} gameLoaded={gameLoaded} />
+        <Timer
+          gameStarted={gameStarted}
+          setGlobalTimer={setGlobalTimer}
+          gameLoaded={gameLoaded}
+        />
         <ImageMap
           clicks={clicks}
           setMapCoordinates={setMapCoordinates}
@@ -239,7 +270,7 @@ const GamePage = () => {
         {dropDownList}
       </div>
     );
-  } else {
+  } else if (imagesLoaded) {
     return (
       <div className="game-container">
         <ul className="character-display">
@@ -248,7 +279,7 @@ const GamePage = () => {
               <li key={character.name}>
                 <img
                   className="character-image"
-                  src={require(`../Assets/${character.name}.png`)}
+                  src={character.imageSrc}
                   alt={character.name}
                 ></img>
               </li>
@@ -259,7 +290,12 @@ const GamePage = () => {
         <button onClick={startGame}>Start Game</button>
       </div>
     );
-  }
+  } else
+    return (
+      <div className="game-container">
+        <h1>Loading</h1>
+      </div>
+    );
 };
 
 export default GamePage;
