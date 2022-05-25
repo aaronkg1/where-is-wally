@@ -21,6 +21,7 @@ const GamePage = () => {
   const [pageCoordinates, setPageCoordinates] = useState([0, 0]);
   const [globalTimer, setGlobalTimer] = useState(0);
   const [userName, setUserName] = useState("");
+  const [gameLoaded, setGameLoaded] = useState("false");
   const [characters, setCharacters] = useState([
     {
       name: "wally",
@@ -62,6 +63,9 @@ const GamePage = () => {
 
   const startGame = () => {
     setGameStarted(true);
+  };
+  const startTimer = () => {
+    setGameLoaded(true);
   };
 
   const getOffset = () => {
@@ -221,7 +225,7 @@ const GamePage = () => {
     return (
       <div>
         <ReactNotifications />
-        <Timer gameStarted={gameStarted} setGlobalTimer={setGlobalTimer} />
+        <Timer setGlobalTimer={setGlobalTimer} gameLoaded={gameLoaded} />
         <ImageMap
           clicks={clicks}
           setMapCoordinates={setMapCoordinates}
@@ -230,6 +234,7 @@ const GamePage = () => {
           clickedMap={clickedMap}
           getImageCoordinates={getImageCoordinates}
           getAbsoluteCoordinates={getAbsoluteCoordinates}
+          startTimer={startTimer}
         />
         {dropDownList}
       </div>

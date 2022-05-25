@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 
 const Timer = (props) => {
   const [time, setTime] = useState(null);
-  const [initialTime, setInitialTime] = useState(new Date());
-  const { gameStarted, setGlobalTimer } = props;
+  const { gameLoaded, setGlobalTimer } = props;
 
   useEffect(() => {
-    if (gameStarted) {
+    if (gameLoaded) {
       setTime(0);
     }
-  }, [gameStarted]);
+  }, [gameLoaded]);
 
   useEffect(() => {
     const interval = setInterval(() => {
