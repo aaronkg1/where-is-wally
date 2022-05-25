@@ -14,16 +14,24 @@ const ImageMap = (props) => {
 
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => {
+  const cacheImage = async () => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = "../Assets/beach-scene.jpg";
+      img.onload = resolve();
+    }).then(() => {
       setImageLoaded(true);
-    };
-    img.src = "../Assets/beach-scene.jpg";
+    });
+  };
+
+  useEffect(() => {
+    cacheImage();
   }, []);
 
   useEffect(() => {
-    startTimer();
+    if (imageLoaded) {
+      startTimer();
+    }
   }, [imageLoaded]);
 
   return (

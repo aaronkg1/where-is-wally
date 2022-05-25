@@ -21,7 +21,7 @@ const Timer = (props) => {
   }, [time]);
 
   if (time === null) {
-    return <div className="timer"></div>;
+    return <div className="timer">null</div>;
   } else return <div className="timer">{time.toFixed(1)}</div>;
 };
 
