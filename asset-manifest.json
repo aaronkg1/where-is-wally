@@ -1,18 +1,17 @@
 {
   "files": {
     "main.css": "/where-is-wally/static/css/main.2329777d.css",
-    "main.js": "/where-is-wally/static/js/main.728d1b3d.js",
-    "static/media/beach-scene.jpg": "/where-is-wally/static/media/beach-scene.bddf9f162bcf91287287.jpg",
+    "main.js": "/where-is-wally/static/js/main.76b1e869.js",
     "static/media/wally.png": "/where-is-wally/static/media/wally.a3e66a57b9a92314daad.png",
     "static/media/wizard.png": "/where-is-wally/static/media/wizard.367c33246e59068b4565.png",
     "static/media/wilma.png": "/where-is-wally/static/media/wilma.24d6215b0ef948634d57.png",
     "static/media/odlaw.png": "/where-is-wally/static/media/odlaw.291cc81ae76d6b4a7654.png",
     "index.html": "/where-is-wally/index.html",
     "main.2329777d.css.map": "/where-is-wally/static/css/main.2329777d.css.map",
-    "main.728d1b3d.js.map": "/where-is-wally/static/js/main.728d1b3d.js.map"
+    "main.76b1e869.js.map": "/where-is-wally/static/js/main.76b1e869.js.map"
   },
   "entrypoints": [
     "static/css/main.2329777d.css",
-    "static/js/main.728d1b3d.js"
+    "static/js/main.76b1e869.js"
   ]
 }
