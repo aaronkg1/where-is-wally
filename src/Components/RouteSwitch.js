@@ -10,7 +10,7 @@ const RouteSwitch = () => {
     <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
       <Nav></Nav>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<GamePage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
