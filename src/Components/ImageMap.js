@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ImageMap = (props) => {
   const {
@@ -9,7 +9,22 @@ const ImageMap = (props) => {
     clickedMap,
     getImageCoordinates,
     getAbsoluteCoordinates,
+    startTimer,
   } = props;
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      setImageLoaded(true);
+    };
+    img.src = "../Assets/beach-scene.jpg";
+  }, []);
+
+  useEffect(() => {
+    startTimer();
+  }, [imageLoaded]);
 
   return (
     <div className="image-container">
