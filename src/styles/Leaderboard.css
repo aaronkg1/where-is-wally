@@ -1,0 +1,69 @@
+.leaderboard-container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  gap: 5vh;
+  padding-top: 10vh;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Tenor Sans", sans-serif;
+  background-image: linear-gradient(aqua, white);
+  text-align: center;
+}
+
+.leaderboard-container h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: red;
+  z-index: 10;
+  position: relative;
+}
+.leaderboard-container h1::after {
+  width: 0;
+  border: 10px solid rgba(#fff, 0);
+  height: 2px;
+  content: " ";
+  margin: 0 auto;
+  background-color: white;
+  display: block;
+  position: relative;
+  transition: width 1s, background-color 2s;
+}
+
+.leaderboard-container h1:hover::after {
+  width: 100%;
+  background-color: red;
+}
+.leaderboard-container .leaderboard {
+  list-style: none;
+  padding: none;
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+}
+
+.leaderboard-item {
+  background-color: red;
+  color: white;
+  padding: 30px;
+  font-size: 3rem;
+  width: 100%;
+  margin: 0;
+  transition: letter-spacing 0.5s;
+}
+
+.leaderboard-item:hover {
+  letter-spacing: 2px;
+}
+
+.leaderboard-item:nth-child(even) {
+  background-color: white;
+  color: red;
+}
+
+:root {
+  font-size: 17px;
+}

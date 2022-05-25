@@ -1,0 +1,74 @@
+.successful-click {
+  border: solid rgb(89, 219, 14) 5px;
+  z-index: 3;
+  width: 60px;
+  height: 120px;
+}
+
+.timer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 12vh;
+  right: 2.5vh;
+  z-index: 2;
+  font-size: 2rem;
+  background-color: rgb(20, 213, 216);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  height: 5vh;
+  width: 10vw;
+  border-radius: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.winner-message {
+  padding-top: 10vh;
+}
+
+.submit-to-leaderboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh;
+  font-size: 2rem;
+}
+
+.submit-to-leaderboard input {
+  width: 30%;
+  text-align: center;
+  font-size: 2rem;
+  padding: 20px;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.game-container {
+  padding-top: 10vh;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 255, 255),
+    rgba(0, 247, 255, 0.59)
+  );
+}
+
+.character-display {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3vw;
+  margin-bottom: 5vh;
+}
+
+.character-image {
+  height: 40vh;
+}
