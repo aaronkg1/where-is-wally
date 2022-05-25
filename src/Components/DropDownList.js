@@ -19,23 +19,25 @@ export const DropDownList = (props) => {
       style={{ ...dropDownStyle.positionDiv, ...style }}
     >
       {characters.map((character) => {
-        const { imageSrc } = character;
-        return (
-          <li
-            key={character.name}
-            className="character-dropdown-child"
-            onClick={() => {
-              props.selectCharacter(character);
-            }}
-          >
-            <div>{_.capitalize(character.name)}</div>
-            <img
-              className="list-image"
-              src={require(`../Assets/${character.name}.png`)}
-              alt={character.name}
-            />
-          </li>
-        );
+        if (character.found) {
+          return null;
+        } else
+          return (
+            <li
+              key={character.name}
+              className="character-dropdown-child"
+              onClick={() => {
+                props.selectCharacter(character);
+              }}
+            >
+              <div>{_.capitalize(character.name)}</div>
+              <img
+                className="list-image"
+                src={require(`../Assets/${character.name}.png`)}
+                alt={character.name}
+              />
+            </li>
+          );
       })}
     </ul>
   );
